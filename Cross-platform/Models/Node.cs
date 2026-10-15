@@ -82,9 +82,9 @@ namespace TeachingAidMac.Models
         {
             Width = 60;
             Height = 60;
-            Background = Brushes.AliceBlue;
-            BorderBrush = Brushes.Black;
-            BorderThickness = new Thickness(3);
+            Background = Brush.Parse("#F3EADF");
+            BorderBrush = Brush.Parse("#897361");
+            BorderThickness = new Thickness(2);
             CornerRadius = new CornerRadius(30); // Make it perfectly circular
 
             // Ensure the node is visible and interactive
@@ -144,14 +144,14 @@ namespace TeachingAidMac.Models
         {
             var brush = _visualState switch
             {
-                NodeVisualState.Normal => Brushes.AliceBlue,
+                NodeVisualState.Normal => Brush.Parse("#F3EADF"),
                 NodeVisualState.Source => Brushes.LightGreen,
                 NodeVisualState.Target => Brushes.LightCoral,
                 NodeVisualState.Highlighted => Brushes.Yellow,
                 NodeVisualState.Processing => Brushes.Red,
                 NodeVisualState.BestPath => Brushes.LightGreen,
                 NodeVisualState.Orange => Brushes.Orange,
-                _ => Brushes.AliceBlue
+                _ => Brush.Parse("#F3EADF")
             };
 
             Background = brush;
@@ -166,8 +166,8 @@ namespace TeachingAidMac.Models
                 HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center,
                 VerticalAlignment = Avalonia.Layout.VerticalAlignment.Center,
                 FontWeight = FontWeight.Bold,
-                FontSize = 24,
-                Foreground = Brushes.Black
+                FontSize = 21,
+                Foreground = Brush.Parse("#362D27")
             };
         }
 
@@ -294,7 +294,7 @@ namespace TeachingAidMac.Models
             _shortestFromSource = 1000000;
             _previousNode = null;
             _visualState = NodeVisualState.Normal;
-            Background = Brushes.AliceBlue;
+            Background = Brush.Parse("#F3EADF");
         }
 
         // Pointer event handlers for dragging
@@ -575,7 +575,7 @@ namespace TeachingAidMac.Models
             switch (_visualState)
             {
                 case NodeVisualState.Normal:
-                    Background = Brushes.AliceBlue;
+                    Background = Brush.Parse("#F3EADF");
                     break;
                 case NodeVisualState.Source:
                     Background = Brushes.LightBlue;

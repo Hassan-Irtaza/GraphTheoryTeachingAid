@@ -46,7 +46,7 @@ namespace TeachingAidMac.Controls
 
         public GraphCanvas()
         {
-            _canvas.Background = Brushes.White;
+            _canvas.Background = Brush.Parse("#FFFCF7");
             _canvas.ClipToBounds = false;
             Content = _canvas;
 
@@ -120,14 +120,14 @@ namespace TeachingAidMac.Controls
                         ZIndex = -1 // Behind nodes
                     };
 
-                    // Create weight label with white background for better visibility
+                    // Keep edge labels legible against the warm canvas.
                     var weightLabel = new TextBlock
                     {
                         Text = connection.Weight.ToString(),
-                        Foreground = Brushes.Red,
+                        Foreground = Brush.Parse("#75685D"),
                         FontSize = 12,
-                        FontWeight = FontWeight.Bold,
-                        Background = Brushes.White, // White background for better visibility
+                        FontWeight = FontWeight.SemiBold,
+                        Background = Brush.Parse("#FFFCF7"),
                         ZIndex = 10 // Above everything
                     };
 
@@ -238,7 +238,7 @@ namespace TeachingAidMac.Controls
             {
                 return Brushes.Orange;
             }
-            return Brushes.Black;
+            return Brush.Parse("#9A897A");
         }
 
         private double GetPenThickness(Node startNode, Node endNode, Connection connection)
@@ -270,7 +270,7 @@ namespace TeachingAidMac.Controls
             {
                 return 5;
             }
-            return 4;
+            return 2;
         }
 
         public void ForceCompleteRefresh()

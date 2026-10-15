@@ -1,0 +1,520 @@
+diff --git a/Cross-platform/App.axaml b/Cross-platform/App.axaml
+index 76355ab..e980f08 100644
+--- a/Cross-platform/App.axaml
++++ b/Cross-platform/App.axaml
+@@ -1,15 +1,100 @@
+-<Application xmlns="https://github.com/avaloniaui"
+-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+-             x:Class="TeachingAidMac.App"
+-             xmlns:local="using:TeachingAidMac"
+-             RequestedThemeVariant="Default">
+-             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+-
+-    <Application.DataTemplates>
+-        <local:ViewLocator/>
+-    </Application.DataTemplates>
+-  
+-    <Application.Styles>
+-        <FluentTheme />
+-    </Application.Styles>
+-</Application>
+\ No newline at end of file
++<Application xmlns="https://github.com/avaloniaui"
++             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
++             x:Class="TeachingAidMac.App"
++             xmlns:local="using:TeachingAidMac"
++             RequestedThemeVariant="Light">
++    <Application.DataTemplates>
++        <local:ViewLocator/>
++    </Application.DataTemplates>
++
++    <Application.Resources>
++        <SolidColorBrush x:Key="WarmBackground">#F5F1EA</SolidColorBrush>
++        <SolidColorBrush x:Key="WarmSurface">#FFFCF7</SolidColorBrush>
++        <SolidColorBrush x:Key="WarmInset">#EFE8DE</SolidColorBrush>
++        <SolidColorBrush x:Key="WarmBorder">#DED5C9</SolidColorBrush>
++        <SolidColorBrush x:Key="WarmInk">#362D27</SolidColorBrush>
++        <SolidColorBrush x:Key="WarmMuted">#75685D</SolidColorBrush>
++        <SolidColorBrush x:Key="WarmAccent">#9C4933</SolidColorBrush>
++        <SolidColorBrush x:Key="WarmHover">#EDE2D5</SolidColorBrush>
++    </Application.Resources>
++
++    <Application.Styles>
++        <FluentTheme>
++            <FluentTheme.Palettes>
++                <ColorPaletteResources x:Key="Light" Accent="#9C4933" />
++            </FluentTheme.Palettes>
++        </FluentTheme>
++        <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml" />
++        <Style Selector="Window">
++            <Setter Property="Background" Value="{StaticResource WarmBackground}" />
++            <Setter Property="Foreground" Value="{StaticResource WarmInk}" />
++            <Setter Property="FontFamily" Value="avares://Avalonia.Fonts.Inter/Assets#Inter" />
++            <Setter Property="FontSize" Value="13" />
++        </Style>
++        <Style Selector="Button">
++            <Setter Property="Background" Value="{StaticResource WarmSurface}" />
++            <Setter Property="Foreground" Value="{StaticResource WarmInk}" />
++            <Setter Property="BorderBrush" Value="{StaticResource WarmBorder}" />
++            <Setter Property="BorderThickness" Value="1" />
++            <Setter Property="CornerRadius" Value="8" />
++            <Setter Property="Padding" Value="13,9" />
++            <Setter Property="MinHeight" Value="36" />
++            <Setter Property="HorizontalContentAlignment" Value="Center" />
++        </Style>
++        <Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
++            <Setter Property="Background" Value="{StaticResource WarmHover}" />
++            <Setter Property="BorderBrush" Value="{StaticResource WarmMuted}" />
++            <Setter Property="Foreground" Value="{StaticResource WarmInk}" />
++        </Style>
++        <Style Selector="Button:pressed /template/ ContentPresenter#PART_ContentPresenter">
++            <Setter Property="Background" Value="{StaticResource WarmInset}" />
++            <Setter Property="Foreground" Value="{StaticResource WarmInk}" />
++        </Style>
++        <Style Selector="Button.primary">
++            <Setter Property="Background" Value="{StaticResource WarmAccent}" />
++            <Setter Property="BorderBrush" Value="{StaticResource WarmAccent}" />
++            <Setter Property="Foreground" Value="#FFFCF7" />
++        </Style>
++        <Style Selector="Button.primary:pointerover /template/ ContentPresenter#PART_ContentPresenter">
++            <Setter Property="Background" Value="#803B29" />
++            <Setter Property="BorderBrush" Value="#803B29" />
++            <Setter Property="Foreground" Value="#FFFCF7" />
++        </Style>
++        <Style Selector="Button.primary:pressed /template/ ContentPresenter#PART_ContentPresenter">
++            <Setter Property="Background" Value="#693020" />
++            <Setter Property="Foreground" Value="#FFFCF7" />
++        </Style>
++        <Style Selector="Button.quiet">
++            <Setter Property="Background" Value="Transparent" />
++            <Setter Property="BorderBrush" Value="Transparent" />
++            <Setter Property="Foreground" Value="{StaticResource WarmMuted}" />
++        </Style>
++        <Style Selector="ComboBox">
++            <Setter Property="Background" Value="{StaticResource WarmSurface}" />
++            <Setter Property="BorderBrush" Value="{StaticResource WarmBorder}" />
++            <Setter Property="CornerRadius" Value="8" />
++            <Setter Property="MinHeight" Value="36" />
++            <Setter Property="HorizontalAlignment" Value="Stretch" />
++        </Style>
++        <Style Selector="Border.card">
++            <Setter Property="Background" Value="{StaticResource WarmSurface}" />
++            <Setter Property="BorderBrush" Value="{StaticResource WarmBorder}" />
++            <Setter Property="BorderThickness" Value="1" />
++            <Setter Property="CornerRadius" Value="14" />
++        </Style>
++        <Style Selector="TextBlock.eyebrow">
++            <Setter Property="Foreground" Value="{StaticResource WarmMuted}" />
++            <Setter Property="FontSize" Value="11" />
++            <Setter Property="FontWeight" Value="SemiBold" />
++            <Setter Property="LetterSpacing" Value="1.5" />
++        </Style>
++        <Style Selector="TextBlock.sectionTitle">
++            <Setter Property="FontSize" Value="15" />
++            <Setter Property="FontWeight" Value="SemiBold" />
++        </Style>
++        <Style Selector="TextBlock.muted">
++            <Setter Property="Foreground" Value="{StaticResource WarmMuted}" />
++            <Setter Property="FontSize" Value="12" />
++        </Style>
++    </Application.Styles>
++</Application>
+diff --git a/Cross-platform/Controls/GraphCanvas.cs b/Cross-platform/Controls/GraphCanvas.cs
+index e2db44d..1a4f7fe 100644
+--- a/Cross-platform/Controls/GraphCanvas.cs
++++ b/Cross-platform/Controls/GraphCanvas.cs
+@@ -46,7 +46,7 @@ namespace TeachingAidMac.Controls
+ 
+         public GraphCanvas()
+         {
+-            _canvas.Background = Brushes.White;
++            _canvas.Background = Brush.Parse("#FFFCF7");
+             _canvas.ClipToBounds = false;
+             Content = _canvas;
+ 
+@@ -120,14 +120,14 @@ namespace TeachingAidMac.Controls
+                         ZIndex = -1 // Behind nodes
+                     };
+ 
+-                    // Create weight label with white background for better visibility
++                    // Keep edge labels legible against the warm canvas.
+                     var weightLabel = new TextBlock
+                     {
+                         Text = connection.Weight.ToString(),
+-                        Foreground = Brushes.Red,
++                        Foreground = Brush.Parse("#75685D"),
+                         FontSize = 12,
+-                        FontWeight = FontWeight.Bold,
+-                        Background = Brushes.White, // White background for better visibility
++                        FontWeight = FontWeight.SemiBold,
++                        Background = Brush.Parse("#FFFCF7"),
+                         ZIndex = 10 // Above everything
+                     };
+ 
+@@ -238,7 +238,7 @@ namespace TeachingAidMac.Controls
+             {
+                 return Brushes.Orange;
+             }
+-            return Brushes.Black;
++            return Brush.Parse("#9A897A");
+         }
+ 
+         private double GetPenThickness(Node startNode, Node endNode, Connection connection)
+@@ -270,7 +270,7 @@ namespace TeachingAidMac.Controls
+             {
+                 return 5;
+             }
+-            return 4;
++            return 2;
+         }
+ 
+         public void ForceCompleteRefresh()
+diff --git a/Cross-platform/Models/Node.cs b/Cross-platform/Models/Node.cs
+index 8bd0e64..35803cd 100644
+--- a/Cross-platform/Models/Node.cs
++++ b/Cross-platform/Models/Node.cs
+@@ -82,9 +82,9 @@ namespace TeachingAidMac.Models
+         {
+             Width = 60;
+             Height = 60;
+-            Background = Brushes.AliceBlue;
+-            BorderBrush = Brushes.Black;
+-            BorderThickness = new Thickness(3);
++            Background = Brush.Parse("#F3EADF");
++            BorderBrush = Brush.Parse("#897361");
++            BorderThickness = new Thickness(2);
+             CornerRadius = new CornerRadius(30); // Make it perfectly circular
+ 
+             // Ensure the node is visible and interactive
+@@ -144,14 +144,14 @@ namespace TeachingAidMac.Models
+         {
+             var brush = _visualState switch
+             {
+-                NodeVisualState.Normal => Brushes.AliceBlue,
++                NodeVisualState.Normal => Brush.Parse("#F3EADF"),
+                 NodeVisualState.Source => Brushes.LightGreen,
+                 NodeVisualState.Target => Brushes.LightCoral,
+                 NodeVisualState.Highlighted => Brushes.Yellow,
+                 NodeVisualState.Processing => Brushes.Red,
+                 NodeVisualState.BestPath => Brushes.LightGreen,
+                 NodeVisualState.Orange => Brushes.Orange,
+-                _ => Brushes.AliceBlue
++                _ => Brush.Parse("#F3EADF")
+             };
+ 
+             Background = brush;
+@@ -166,8 +166,8 @@ namespace TeachingAidMac.Models
+                 HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center,
+                 VerticalAlignment = Avalonia.Layout.VerticalAlignment.Center,
+                 FontWeight = FontWeight.Bold,
+-                FontSize = 24,
+-                Foreground = Brushes.Black
++                FontSize = 21,
++                Foreground = Brush.Parse("#362D27")
+             };
+         }
+ 
+@@ -294,7 +294,7 @@ namespace TeachingAidMac.Models
+             _shortestFromSource = 1000000;
+             _previousNode = null;
+             _visualState = NodeVisualState.Normal;
+-            Background = Brushes.AliceBlue;
++            Background = Brush.Parse("#F3EADF");
+         }
+ 
+         // Pointer event handlers for dragging
+@@ -575,7 +575,7 @@ namespace TeachingAidMac.Models
+             switch (_visualState)
+             {
+                 case NodeVisualState.Normal:
+-                    Background = Brushes.AliceBlue;
++                    Background = Brush.Parse("#F3EADF");
+                     break;
+                 case NodeVisualState.Source:
+                     Background = Brushes.LightBlue;
+diff --git a/Cross-platform/Views/MainWindow.axaml b/Cross-platform/Views/MainWindow.axaml
+index 8746934..f5ad9d5 100644
+--- a/Cross-platform/Views/MainWindow.axaml
++++ b/Cross-platform/Views/MainWindow.axaml
+@@ -1,111 +1,170 @@
+-<Window xmlns="https://github.com/avaloniaui"
+-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+-        xmlns:vm="using:TeachingAidMac.ViewModels"
+-        xmlns:controls="using:TeachingAidMac.Controls"
+-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+-        xmlns:dataGrid="using:Avalonia.Controls"
+-        mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="800"
+-        x:Class="TeachingAidMac.Views.MainWindow"
+-        x:DataType="vm:MainWindowViewModel"
+-        Icon="/Assets/avalonia-logo.ico"
+-        Title="Graph Theory Teaching Aid">
+-
+-    <Design.DataContext>
+-        <!-- This only sets the DataContext for the previewer in an IDE,
+-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+-        <vm:MainWindowViewModel/>
+-    </Design.DataContext>    <Grid>
+-        <Grid.RowDefinitions>
+-            <RowDefinition Height="Auto"/>
+-            <RowDefinition Height="Auto"/>
+-            <RowDefinition Height="Auto"/>
+-            <RowDefinition Height="*"/>
+-            <RowDefinition Height="Auto"/>
+-        </Grid.RowDefinitions>
+-          <!-- Toolbar -->
+-        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="5">
+-            <Button Name="AddNodeButton" Content="Add Node" Margin="5" Background="Black" Foreground="LightBlue" BorderBrush="LightBlue"/>
+-            <Button Name="RemoveNodeButton" Content="Remove Node" Margin="5" Background="Black" Foreground="LightBlue" BorderBrush="LightBlue"/>
+-            <Button Name="LoadGraphButton" Content="Load Sample Graph" Margin="5" Background="Black" Foreground="LightBlue" BorderBrush="LightBlue"/>
+-            <Button Name="ClearGraphButton" Content="Clear Graph" Margin="5" Background="Black" Foreground="LightBlue" BorderBrush="LightBlue"/>
+-            <Button Name="SwitchModeButton" Content="Switch Mode" Margin="5" Background="Black" Foreground="LightBlue" BorderBrush="LightBlue"/>
+-            <Button Name="FullyConnectButton" Content="Fully Connect" Margin="5" Background="Black" Foreground="LightBlue" BorderBrush="LightBlue"/>
+-            <Button Name="SaveGraphButton" Content="Save Graph" Margin="5" Background="Black" Foreground="LightBlue" BorderBrush="LightBlue"/>
+-            <Button Name="LoadFileButton" Content="Load Graph" Margin="5" Background="Black" Foreground="LightBlue" BorderBrush="LightBlue"/>
+-        </StackPanel>
+-          <!-- Algorithm Controls -->
+-        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5">
+-            <Button Name="TSPButton" Content="TSP Brute Force" Margin="5" Background="Black" Foreground="LightBlue" BorderBrush="LightBlue"/>
+-            <Button Name="NearestNeighbourButton" Content="TSP Nearest Neighbour" Margin="5" Background="Black" Foreground="LightBlue" BorderBrush="LightBlue"/>
+-            <Button Name="BFSButton" Content="BFS" Margin="5" Background="Black" Foreground="LightBlue" BorderBrush="LightBlue"/>
+-            <Button Name="DFSButton" Content="DFS" Margin="5" Background="Black" Foreground="LightBlue" BorderBrush="LightBlue"/>            <Button Name="DijkstraButton" Content="Dijkstra" Margin="5" Background="Black" Foreground="LightBlue" BorderBrush="LightBlue"/>
+-            <Button Name="ResetButton" Content="Reset Nodes" Margin="5" Background="Black" Foreground="LightBlue" BorderBrush="LightBlue"/>
+-        </StackPanel>
+-        
+-        <!-- Path Selection and Speed Control -->
+-        <Grid Grid.Row="2">
+-            <Grid.RowDefinitions>
+-                <RowDefinition Height="Auto"/>
+-                <RowDefinition Height="Auto"/>
+-            </Grid.RowDefinitions>
+-            
+-            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="5">
+-                <TextBlock Text="Source:" VerticalAlignment="Center" Margin="10,0,5,0"/>
+-                <ComboBox Name="SourceNodeCombo" Width="80" Margin="0,0,10,0"/>
+-                <TextBlock Text="Target:" VerticalAlignment="Center" Margin="10,0,5,0"/>
+-                <ComboBox Name="TargetNodeCombo" Width="80" Margin="0,0,10,0"/>
+-                <Button Name="SetSourceButton" Content="Set Source" Margin="5" Background="Black" Foreground="LightBlue" BorderBrush="LightBlue"/>
+-                <Button Name="SetTargetButton" Content="Set Target" Margin="5" Background="Black" Foreground="LightBlue" BorderBrush="LightBlue"/>
+-                <Button Name="FindPathButton" Content="Find Shortest Path" Margin="5" Background="Black" Foreground="LightBlue" BorderBrush="LightBlue"/>
+-            </StackPanel>
+-            
+-            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5">
+-                <TextBlock Text="Animation Speed:" VerticalAlignment="Center" Margin="10,0,5,0"/>
+-                <Slider Name="SpeedSlider" Width="200" Minimum="100" Maximum="2000" Value="500" Margin="0,0,10,0"/>
+-                <TextBlock Name="SpeedLabel" Text="500ms" VerticalAlignment="Center" Margin="5,0"/>
+-                <TextBlock Text="Mode:" VerticalAlignment="Center" Margin="20,0,5,0"/>
+-                <TextBlock Name="ModeLabel" Text="Manual" VerticalAlignment="Center" Margin="5,0"/>
+-            </StackPanel>
+-        </Grid>        <!-- Main Content -->
+-        <Grid Grid.Row="3">
+-            <Grid.ColumnDefinitions>
+-                <ColumnDefinition Width="*"/>
+-                <ColumnDefinition Width="300"/>
+-            </Grid.ColumnDefinitions>
+-
+-            <!-- Graph Canvas -->
+-            <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="1" Margin="5">
+-                <controls:GraphCanvas Name="GraphCanvas" Background="White"/>
+-            </Border>
+-
+-            <!-- Information Panel -->
+-            <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="1" Margin="5">
+-                <StackPanel Margin="10">
+-                    <TextBlock Text="Algorithm Output" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
+-                    <ScrollViewer Height="200">
+-                        <TextBlock Name="AlgorithmOutput" TextWrapping="Wrap" Background="LightGray" Padding="5"/>
+-                    </ScrollViewer>
+-                    
+-                    <TextBlock Text="Graph Statistics" FontWeight="Bold" FontSize="16" Margin="0,20,0,10"/>
+-                    <StackPanel Name="StatsPanel">
+-                        <TextBlock Name="NodeCountText" Text="Nodes: 0"/>
+-                        <TextBlock Name="ConnectionCountText" Text="Connections: 0"/>
+-                        <TextBlock Name="ShortestPathText" Text="Last Path Length: -"/>
+-                    </StackPanel>
+-                    
+-                    <TextBlock Text="Adjacency Matrix" FontWeight="Bold" FontSize="16" Margin="0,20,0,10"/>                    <ScrollViewer Height="150">
+-                        <DataGrid Name="AdjacencyMatrix" IsReadOnly="True" CanUserResizeColumns="False" 
+-                                  GridLinesVisibility="All" Background="LightBlue" HeadersVisibility="All"/>
+-                    </ScrollViewer>
+-                </StackPanel>
+-            </Border>
+-        </Grid>
+-
+-        <!-- Status Bar -->
+-        <Border Grid.Row="4" Background="LightGray" Height="25">
+-            <TextBlock Name="StatusText" Text="Ready" VerticalAlignment="Center" Margin="5,0"/>
+-        </Border>
+-    </Grid>
+-
+-</Window>
++<Window xmlns="https://github.com/avaloniaui"
++        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
++        xmlns:vm="using:TeachingAidMac.ViewModels"
++        xmlns:controls="using:TeachingAidMac.Controls"
++        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
++        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
++        mc:Ignorable="d" d:DesignWidth="1440" d:DesignHeight="900"
++        x:Class="TeachingAidMac.Views.MainWindow"
++        x:DataType="vm:MainWindowViewModel"
++        Width="1440" Height="900" MinWidth="1120" MinHeight="740"
++        WindowStartupLocation="CenterScreen"
++        Title="Graph Theory Teaching Aid">
++    <Design.DataContext>
++        <vm:MainWindowViewModel/>
++    </Design.DataContext>
++
++    <Grid RowDefinitions="Auto,Auto,*,Auto" Margin="24,20,24,0">
++        <!-- A quiet identity bar keeps file actions separate from the workspace. -->
++        <Grid ColumnDefinitions="Auto,*,Auto" Margin="0,0,0,20">
++            <Border Width="44" Height="44" CornerRadius="12" Background="{StaticResource WarmInset}" Margin="0,0,14,0">
++                <Canvas Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" IsHitTestVisible="False">
++                    <Path Data="M7,8 L23,13 L11,24 Z" Stroke="{StaticResource WarmAccent}" StrokeThickness="1.5" />
++                    <Ellipse Width="7" Height="7" Canvas.Left="3.5" Canvas.Top="4.5" Fill="{StaticResource WarmAccent}" />
++                    <Ellipse Width="7" Height="7" Canvas.Left="19.5" Canvas.Top="9.5" Fill="{StaticResource WarmAccent}" />
++                    <Ellipse Width="7" Height="7" Canvas.Left="7.5" Canvas.Top="20.5" Fill="{StaticResource WarmAccent}" />
++                </Canvas>
++            </Border>
++            <StackPanel Grid.Column="1" Spacing="3" VerticalAlignment="Center">
++                <TextBlock Text="Graph Theory" FontSize="23" FontWeight="SemiBold" />
++                <TextBlock Text="A little exploration. A clearer connection." Classes="muted" />
++            </StackPanel>
++            <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
++                <Button Name="LoadFileButton" Content="Load graph" />
++                <Button Name="SaveGraphButton" Content="Save graph" />
++            </StackPanel>
++        </Grid>
++
++        <Border Grid.Row="1" Classes="card" Padding="12,10" Margin="0,0,0,16">
++            <Grid ColumnDefinitions="*,Auto">
++                <WrapPanel Orientation="Horizontal">
++                    <Button Name="AddNodeButton" Content="+ Add node" Classes="primary" Margin="0,0,8,0" />
++                    <Button Name="RemoveNodeButton" Content="Remove node" Margin="0,0,8,0" />
++                    <Button Name="LoadGraphButton" Content="Load sample graph" Margin="0,0,8,0" />
++                    <Button Name="FullyConnectButton" Content="Fully connect" Margin="0,0,8,0" />
++                    <Button Name="ClearGraphButton" Content="Clear graph" Classes="quiet" />
++                </WrapPanel>
++                <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
++                    <Border Background="{StaticResource WarmInset}" CornerRadius="6" Padding="10,6" VerticalAlignment="Center">
++                        <StackPanel Orientation="Horizontal" Spacing="5">
++                            <TextBlock Text="Weights:" Classes="muted" />
++                            <TextBlock Name="ModeLabel" Text="Manual" FontSize="12" FontWeight="SemiBold" />
++                        </StackPanel>
++                    </Border>
++                    <Button Name="SwitchModeButton" Content="Switch mode" Classes="quiet" />
++                </StackPanel>
++            </Grid>
++        </Border>
++
++        <Grid Grid.Row="2" ColumnDefinitions="*,320" ColumnSpacing="16" Margin="0,0,0,12">
++            <!-- The canvas retains its original coordinate system and node hit areas. -->
++            <Border Classes="card">
++                <Grid RowDefinitions="Auto,*,Auto,Auto">
++                    <Grid ColumnDefinitions="*,Auto" Margin="20,18,20,14">
++                        <StackPanel Spacing="5">
++                            <TextBlock Text="YOUR WORKSPACE" Classes="eyebrow" />
++                            <TextBlock Text="Make the connections." FontSize="21" FontWeight="SemiBold" />
++                        </StackPanel>
++                        <Button Grid.Column="1" Name="ResetButton" Content="Reset nodes" Classes="quiet" VerticalAlignment="Center" />
++                    </Grid>
++                    <Border Grid.Row="1" Margin="12,0" CornerRadius="10" Background="{StaticResource WarmSurface}" ClipToBounds="True">
++                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
++                            <controls:GraphCanvas Name="GraphCanvas" MinWidth="680" MinHeight="380" Background="{StaticResource WarmSurface}" />
++                        </ScrollViewer>
++                    </Border>
++                    <Border Grid.Row="2" Margin="20,12,20,0" Padding="0,14" BorderBrush="{StaticResource WarmBorder}" BorderThickness="0,1,0,0">
++                        <StackPanel Spacing="12">
++                            <StackPanel Name="StatsPanel" Orientation="Horizontal" Spacing="20">
++                                <TextBlock Name="NodeCountText" Text="Nodes: 0" Classes="muted" />
++                                <TextBlock Name="ConnectionCountText" Text="Connections: 0" Classes="muted" />
++                                <TextBlock Name="ShortestPathText" Text="Last Path Length: -" Classes="muted" />
++                            </StackPanel>
++                            <WrapPanel Orientation="Horizontal">
++                                <TextBlock Text="Drag nodes to arrange" Classes="muted" Margin="0,0,22,0" />
++                                <TextBlock Text="Right-click a node to edit connections" Classes="muted" />
++                            </WrapPanel>
++                            <WrapPanel Orientation="Horizontal">
++                                <StackPanel Orientation="Horizontal" Spacing="6" Margin="0,0,16,0">
++                                    <Ellipse Width="8" Height="8" Fill="Red" VerticalAlignment="Center" />
++                                    <TextBlock Text="Exploring" Classes="muted" />
++                                </StackPanel>
++                                <StackPanel Orientation="Horizontal" Spacing="6" Margin="0,0,16,0">
++                                    <Ellipse Width="8" Height="8" Fill="Orange" VerticalAlignment="Center" />
++                                    <TextBlock Text="Alternative" Classes="muted" />
++                                </StackPanel>
++                                <StackPanel Orientation="Horizontal" Spacing="6" Margin="0,0,16,0">
++                                    <Ellipse Width="8" Height="8" Fill="Green" VerticalAlignment="Center" />
++                                    <TextBlock Text="Best path" Classes="muted" />
++                                </StackPanel>
++                                <StackPanel Orientation="Horizontal" Spacing="6">
++                                    <Ellipse Width="8" Height="8" Fill="Yellow" Stroke="#9B7E2F" StrokeThickness="1" VerticalAlignment="Center" />
++                                    <TextBlock Text="Final solution" Classes="muted" />
++                                </StackPanel>
++                            </WrapPanel>
++                        </StackPanel>
++                    </Border>
++                    <Expander Grid.Row="3" Header="Adjacency matrix" Margin="12,0,12,12" HorizontalAlignment="Stretch">
++                        <DataGrid Name="AdjacencyMatrix" Height="150" IsReadOnly="True" CanUserResizeColumns="False"
++                                  GridLinesVisibility="All" HeadersVisibility="All"
++                                  Background="{StaticResource WarmSurface}" BorderBrush="{StaticResource WarmBorder}" />
++                    </Expander>
++                </Grid>
++            </Border>
++
++            <!-- All original controls stay in the same namescope for code-behind. -->
++            <Grid Grid.Column="1" RowDefinitions="*,190" RowSpacing="12">
++                <Border Classes="card" Padding="18">
++                    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
++                        <StackPanel Spacing="10">
++                            <TextBlock Text="EXPLORE AN ALGORITHM" Classes="eyebrow" />
++                            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="6">
++                                <Button Name="BFSButton" Content="BFS" HorizontalAlignment="Stretch" />
++                                <Button Grid.Column="1" Name="DFSButton" Content="DFS" HorizontalAlignment="Stretch" />
++                                <Button Grid.Column="2" Name="DijkstraButton" Content="Dijkstra" Padding="8,9" HorizontalAlignment="Stretch" />
++                            </Grid>
++                            <StackPanel Spacing="6">
++                                <Button Name="TSPButton" Content="TSP Brute Force" HorizontalAlignment="Stretch" />
++                                <Button Name="NearestNeighbourButton" Content="TSP Nearest Neighbour" HorizontalAlignment="Stretch" />
++                            </StackPanel>
++                            <Border Height="1" Background="{StaticResource WarmBorder}" />
++                            <TextBlock Text="Choose your route" Classes="sectionTitle" />
++                            <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="10" RowSpacing="7">
++                                <TextBlock Text="Source" Classes="muted" />
++                                <TextBlock Grid.Column="1" Text="Target" Classes="muted" />
++                                <ComboBox Grid.Row="1" Name="SourceNodeCombo" AutomationProperties.Name="Source node" />
++                                <ComboBox Grid.Row="1" Grid.Column="1" Name="TargetNodeCombo" AutomationProperties.Name="Target node" />
++                                <Button Grid.Row="2" Name="SetSourceButton" Content="Set source" HorizontalAlignment="Stretch" />
++                                <Button Grid.Row="2" Grid.Column="1" Name="SetTargetButton" Content="Set target" HorizontalAlignment="Stretch" />
++                            </Grid>
++                            <Button Name="FindPathButton" Content="Find shortest path" Classes="primary" HorizontalAlignment="Stretch" />
++                            <Grid ColumnDefinitions="*,Auto">
++                                <TextBlock Text="Animation delay" Classes="muted" />
++                                <TextBlock Grid.Column="1" Name="SpeedLabel" Text="500ms" FontSize="12" FontWeight="SemiBold" />
++                            </Grid>
++                            <Slider Name="SpeedSlider" Minimum="100" Maximum="2000" Value="500"
++                                    AutomationProperties.Name="Animation delay in milliseconds" />
++                        </StackPanel>
++                    </ScrollViewer>
++                </Border>
++                <Border Grid.Row="1" Classes="card" Padding="18">
++                    <Grid RowDefinitions="Auto,*" RowSpacing="12">
++                        <TextBlock Text="Algorithm output" Classes="sectionTitle" />
++                        <Border Grid.Row="1" Background="{StaticResource WarmBackground}" CornerRadius="8" Padding="12">
++                            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
++                                <TextBlock Name="AlgorithmOutput" TextWrapping="Wrap" FontSize="12" LineHeight="20" />
++                            </ScrollViewer>
++                        </Border>
++                    </Grid>
++                </Border>
++            </Grid>
++        </Grid>
++
++        <Border Grid.Row="3" BorderBrush="{StaticResource WarmBorder}" BorderThickness="0,1,0,0" Padding="2,11">
++            <Grid ColumnDefinitions="Auto,*,Auto">
++                <Ellipse Width="6" Height="6" Fill="#6E7953" Margin="0,0,8,0" VerticalAlignment="Center" />
++                <TextBlock Grid.Column="1" Name="StatusText" Text="Ready" Classes="muted" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
++                <TextBlock Grid.Column="2" Text="GRAPH THEORY TEACHING AID" Classes="eyebrow" Margin="16,0,0,0" VerticalAlignment="Center" />
++            </Grid>
++        </Border>
++    </Grid>
++</Window>
