@@ -1,129 +1,52 @@
-# Graph Theory Teacher Aid
+# Graph Theory Studio — React
 
-A comprehensive Visual Basic .NET application designed to help teachers and students visualize and understand fundamental graph theory algorithms through interactive demonstrations.
+The GraphTheoryTeachingAid desktop application rebuilt as a React web application, with a warm minimal interface. It runs entirely in your browser; no backend, API keys, or paid services are needed.
 
-## Overview
+## Run locally
 
-This educational tool provides a visual, interactive environment for exploring graph theory concepts, making abstract algorithms tangible and easier to understand. The application features a graphical interface where users can create, modify, and analyze graphs while watching algorithms execute step-by-step.
+Install Node.js 20.19+ or 22.12+, then:
+
+```sh
+npm install
+npm run dev
+```
+
+Open the local URL shown in the terminal. For a production build:
+
+```sh
+npm run build
+npm run preview
+```
+
+Deploy `dist/` to any static host. `npm test` runs the algorithm, graph, XML, and React interaction checks.
 
 ## Features
 
-### Graph Creation and Editing
+- Add, remove, rename, and drag nodes A–Z. Keyboard: arrows move nodes, Enter edits, Delete removes.
+- Click/right-click a node to add/remove connections and edit manual edge weights.
+- Click an edge weight to edit or remove that connection.
+- Manual weights or distance weights (canvas distance divided by 20, rounded).
+- BFS, DFS, Dijkstra, brute-force TSP (up to 10 nodes), and nearest-neighbour TSP.
+- Animated execution, pause/resume, next step, stop, adjustable delay, and path highlighting.
+- Live adjacency matrix/list, node/edge counts, algorithm output, path weight and edge count.
+- Save/load GraphData XML using the Avalonia C# project's element names; downloaded files are local.
+- Responsive layout, keyboard controls, labelled inputs, and reduced-motion support.
 
-- **Interactive Node Management**: Add, remove, and rename nodes (A-Z) with visual circular representations
-- **Dynamic Edge Connections**: Create weighted connections between nodes with customizable edge weights
-- **Drag and Drop Interface**: Move nodes around the canvas to create optimal graph layouts
-- **Two Edge Weight Modes**:
-  - **Manual Mode**: Set custom edge weights
-  - **Pixel Mode**: Automatically calculate edge weights based on visual distance between nodes
+## Project structure
 
-### Algorithm Visualizations
+- `src/App.jsx`: application layout and graph editing dialogs.
+- `src/styles.css`: warm theme and responsive styles.
+- `src/components/GraphCanvas.jsx`: interactive SVG graph.
+- `src/components/Representations.jsx`: adjacency matrix and list.
+- `src/lib/graph.js`: graph operations and XML import/export.
+- `src/lib/algorithms.js`: pure generator-based algorithms.
+- `src/lib/useAlgorithmPlayer.js`: cancellable animation playback.
+- `tests/`: automated checks.
 
-#### Pathfinding Algorithms
+## Porting notes
 
-- **Breadth-First Search (BFS)**: Find paths using queue-based level-by-level exploration
-- **Depth-First Search (DFS)**: Explore paths using recursive depth-first traversal
-- **Dijkstra's Algorithm**: Find shortest paths with weighted edges, displaying optimal routes and distances
+The UI models undirected, non-negative weighted graphs, as used by the original sample. Zero-weight edges are supported. Files with conflicting weights in opposite directions are rejected rather than silently changed. The 7-node sample retains the original topology and weights, with an arrangement adapted to the web canvas. Both TSP algorithms execute in JavaScript and do not inherit the desktop version's UI-thread error.
 
-#### Optimization Algorithms
+XML location fields use the original top-left node positions; the React canvas converts to/from node centers. Distance weights are measured in SVG canvas units so they remain stable when the browser window changes size. A plain dash in the adjacency matrix indicates no connection; zero is a valid weight.
 
-- **Traveling Salesman Problem (TSP)**:
-  - **Brute Force**: Exact solution for small graphs (< 6 nodes) by checking all permutations
-  - **Nearest Neighbor Heuristic**: Approximate solution for larger graphs using greedy approach
-
-### Visual Features
-
-- **Color-Coded Algorithm Steps**:
-  - Red: Currently processing/exploring
-  - Green: Best path found or processed nodes
-  - Orange: Alternative paths explored
-  - Yellow: Highlighted final solutions
-- **Adjustable Animation Speed**: Control visualization speed with trackbar
-- **Real-Time Path Highlighting**: See algorithms work step-by-step with visual feedback
-
-### Graph Representations
-
-- **Adjacency Matrix**: Tabular view showing connections and weights between all nodes
-- **Adjacency List**: List format displaying each node's connections and corresponding weights
-- **Auto-updating**: Both representations update automatically as the graph changes
-
-### Data Management
-
-- **Save/Load Functionality**: Preserve graph configurations using XML serialization
-- **Predefined Sample Graph**: Quick-start with a pre-configured 7-node example graph
-- **Graph Reset Options**: Clear graph or reload initial configuration
-
-## Technical Architecture
-
-### Core Classes
-
-- **`Graph`**: Main graph container managing nodes and connections
-- **`Node`**: Interactive UI elements representing graph vertices with drag-and-drop functionality
-- **`Connection`**: Represents weighted edges between nodes with visual rendering
-- **`Stack`** and **`Queue`**: Custom data structures for algorithm implementations
-
-### Algorithm Implementations
-
-- **`TSPBruteForce`**: Exhaustive search for optimal TSP solutions
-- **`NearestNeighbours`**: Heuristic approach for approximate TSP solutions
-
-### Data Persistence
-
-- **`GraphData`**, **`NodeData`**, **`ConnectionData`**: Serializable classes for saving/loading graph states
-
-## Usage Instructions
-
-### Getting Started
-
-1. Run the application to see the default 7-node sample graph
-2. Use "Load Initial Graph" to reset to the sample configuration
-3. Experiment with the pre-loaded graph or create your own
-
-### Creating Custom Graphs
-
-1. Click "Add Node" and enter a capital letter (A-Z)
-2. Right-click any node to see connection options
-3. Check/uncheck other nodes to create/remove connections
-4. Enter edge weights when prompted (in manual mode)
-5. Use "Switch Mode" to toggle between manual and pixel-based edge weights
-
-### Running Algorithms
-
-1. Set source and target nodes using the respective buttons
-2. Choose an algorithm (BFS, DFS, Dijkstra's, or TSP)
-3. Adjust the speed slider to control animation speed
-4. Watch the algorithm visualize its execution process
-5. View results in message boxes showing paths and distances
-
-### Advanced Features
-
-- **Fully Connect**: Automatically create connections between all nodes (pixel mode only)
-- **Save/Load**: Preserve interesting graph configurations for later use
-- **Multiple Representations**: Switch between visual, matrix, and list views
-
-## Educational Value
-
-This tool is ideal for:
-
-- **Computer Science Courses**: Demonstrating algorithm complexity and behavior
-- **Mathematics Education**: Visualizing graph theory concepts
-- **Self-Study**: Interactive learning of pathfinding and optimization algorithms
-- **Algorithm Comparison**: Side-by-side analysis of different approaches
-
-## Technical Requirements
-
-- **Platform**: Windows with .NET Framework
-- **Language**: Visual Basic .NET
-- **UI Framework**: Windows Forms
-- **File I/O**: XML serialization for data persistence
-
-> **Note**: A cross-platform version of this project has been roughly converted to C# using Avalonia UI framework and can be found in the `Cross-platform/` directory. This version allows the application to run on macOS, Linux, and Windows.
-
-## Algorithm Complexity Demonstrations
-
-- **BFS/DFS**: O(V + E) time complexity visualization
-- **Dijkstra's**: O(V²) or O(E + V log V) depending on implementation
-- **TSP Brute Force**: O(n!) factorial complexity demonstration
-- **Nearest Neighbor**: O(n²) heuristic approach
-
-This application bridges the gap between theoretical computer science concepts and practical understanding through interactive visualization and hands-on experimentation.
+The app does not upload graph files or persist them on a server. It resets to the sample on page reload. Save XML to keep changes. Google Fonts are optional; system fonts are used if unavailable.
